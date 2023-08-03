@@ -1,0 +1,155 @@
+<doctype html>
+    <html>
+    
+    <head>
+        <title> Show Device Status </title>
+    
+        <style>
+            /*- body properties--*/
+            body {
+                background: white;
+                height: 100%;
+                padding: 0px;
+                margin: 0px;
+            }
+    
+            /*--h1 properties--*/
+            h1 {
+                font-family: "Raleway", sans-serif;
+                font-style: normal;
+                font-variant: normal;
+                font-weight: normal;
+                font-size: 40px;
+                color: green;
+                text-align: center;
+            }
+    
+    
+            /*--paragraph properties--*/
+            p {
+                font-family: "Raleway", sans-serif;
+                font-style: normal;
+                font-variant: normal;
+                font-weight: normal;
+                font-size: 20px;
+                ;
+                color: black;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+    
+            /*--Navigation bar propeties--*/
+            nav {
+                background: green;
+                text-align: center;
+                width: 100%;
+                position: relative;
+                margin: none;
+            }
+    
+    
+            /*--Navigation list propeties--*/
+            nav ol {
+                border: none;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                text-align: left;
+            }
+    
+            nav li {
+                display: inline;
+                border: none;
+                padding: 3px;
+            }
+    
+            nav li a {
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: normal;
+                text-decoration: none;
+                font-variant: normal;
+                font-weight: normal;
+                font-size: 25px;
+                color: white;
+                display: inline-block;
+                padding: 10px;
+            }
+    
+            nav li a:hover {
+                color: wheat;
+                text-decoration: none;
+            }
+
+            form
+            {
+                font-family: "Raleway", sans-serif;
+                font-size: 25px;
+                color:green;
+                margin-left: 25%;
+                border: 5px solid green;
+                width:700px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            #see_device{
+                font-family: "Raleway", sans-serif;
+                font-size: 20px;
+                color:black;
+            }
+
+            .seeDeviceButton{
+                background-color: green;
+                color:white;
+                margin-top: 30px;
+                border:none;
+                font-size: 20px;
+                padding:5px;
+                width:150px;
+                height:40px;
+            }
+
+            .seeDeviceButton:hover{
+            color:wheat;
+            }
+
+        </style>
+    
+    </head>
+    
+    <nav>
+        <div id="menu">
+            <ol>
+                <li> <a href="/">Home </a> </li>
+                <li> <a href="/about"> About </a> </li>
+                <li> <a href="/addDevice"> Add Device </a> </li>
+                <li> <a href=""> Check Device Status </a> </li>
+                <li> <a href="/updateDeviceStatus"> Upate Device Status</a> </li>
+                <li> <a href="/deleteDevice"> Delete Device </a> </li>
+            </ol>
+        </div>
+    </nav>
+    
+    <body>
+        <h1> My Smart Home - show Device Status </h1>
+       
+        <!--Uses the get method to get the data-->
+        <form method="GET" action="/seeStatus"> 
+
+            <!--Loops over all the fields and shows the name valued in a select-->
+            <label for="see_device"> Select the device you want to see:</label>
+            <select name="see_device" id="see_device" required>
+                <% showDevices.forEach(function(devices){ %>
+                <!--Assigns the value as id because its unique-->
+                <option value=<%= devices.id %>> <%= devices.name %></option>
+                <% }) %>
+            </select><br>
+
+            <!--Button to execute the get method-->
+            <button class="seeDeviceButton"> See Device </button>
+        </form>
+
+           
+    </body>
+    
+    </html>

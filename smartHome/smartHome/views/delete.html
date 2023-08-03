@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Delete Device</title>
+
+    <style>
+        /*- body properties--*/
+        body {
+            background: white;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        /*--h1 properties--*/
+        h1 {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 40px;
+            color: green;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
+        }
+
+
+        /*--paragraph properties--*/
+        p {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 10px;
+            color: black;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-top:20px;
+            text-align: center;
+        }
+
+        a{
+            font-family: "Raleway", sans-serif;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding-left:35%;
+            
+        }
+
+        a:hover{
+            color: wheat;
+        }
+
+        /*--Navigation bar propeties--*/
+        nav {
+            background: green;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            margin: none;
+        }
+
+
+        /*--Navigation list propeties--*/
+        nav ol {
+            border: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        nav li {
+            display: inline;
+            border: none;
+            padding: 3px;
+        }
+
+        nav li a {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            text-decoration: none;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 25px;
+            color: white;
+            display: inline-block;
+            padding: 10px;
+        }
+
+        nav li a:hover {
+            color: wheat;
+            text-decoration: none;
+        }
+
+        #headings{
+            font-family: "Raleway", sans-serif;
+            font-size: 25px;
+            color:green;
+            font-style: bold;
+        }
+
+        #values{
+            font-family: "Raleway", sans-serif;
+            font-size: 25px;
+            color:black;
+            font-style: normal;
+            margin-left: 10px;
+            margin-bottom: 30px;
+        }
+
+        #forSpace{
+            margin:20px;
+        }
+
+        #device_id{
+            margin:10px;
+            color:black;
+            font-size: 25px;
+            border:none;
+        }
+
+        form
+        {
+            color: green;
+            font-size: 25px;
+            font-family: "Raleway", sans-serif;
+            margin-left:10px;
+        }
+
+        form p{
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 25px;
+            ;
+            color: black;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-top:50px;
+        }
+
+        .delDevice{
+            background-color: green;
+            color:white;
+            margin-left:150px;
+            margin-top: 10px;
+            width:100px;
+            border:none;
+            font-size: 20px;
+            padding:5px;
+            
+        }
+
+        .delDevice:hover{
+            color:wheat;
+        }
+
+        .noButton{
+            background-color: red;
+            color:white;
+            margin-left:350px;
+            margin-top: -33px;
+            width:100px;
+            border:none;
+            font-size: 20px;
+            padding:5px;
+        }
+
+        #bor{
+            width:700px;
+            margin-left: 25%;
+            border:5px solid green;
+            margin-top:50px;
+            padding:20px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+</head>
+
+<nav>
+    <div id="menu">
+        <ol>
+            <li> <a href="/">Home </a> </li>
+            <li> <a href="/about"> About </a> </li>
+            <li> <a href="/addDevice"> Add Device </a> </li>
+            <li> <a href="/showDeviceStatus"> Check Device Status </a> </li>
+            <li> <a href="/updateDeviceStatus"> Upate Device Status</a> </li>
+            <li> <a href="/deleteDevice"> Delete Device </a> </li>
+        </ol>
+    </div>
+</nav>
+
+<body>
+
+    <!--Uses the deleteDev function to loop over all values in database-->
+    <% deleteDev.forEach(function(devices){ %>
+
+    <!--Uses the form post method in order to delete the devices-->
+    <form method="POST" action="deletePermanently">
+    <h1> My Smart Home - Delete Device <%= devices.name %></h1>
+
+    <div id="bor">
+    <!--Displays values to user so they know about the device they are deleting-->
+    <label for="device_id"> Device Number: </label>
+        <input id="device_id" type="number" name="device_id"  min="<%= devices.id %>" max="<%= devices.id %>" value=<%= devices.id %>  required/> <br>
+
+    <span id = "headings"> Name : </span> 
+        <span id = "values"> <%= devices.name %> </span>  <br> <div id="forSpace"></div> 
+    
+    <span id = "headings"> Type of Device :</span> 
+        <span id = "values"><%= devices.device_type %> </span> <br> <div id="forSpace"></div> 
+
+    <span id = "headings"> On/Off : </span> 
+        <span id = "values"><%= devices.on_off %> </span><br> <div id="forSpace"></div> 
+
+    <span id = "headings"> Open/Close : </span>
+        <span id = "values"><%= devices.open_close %> </span><br> <div id="forSpace"></div> 
+
+    <span id = "headings">Temperature : </span> 
+        <span id = "values"><%= devices.temperature %> </span><br><div id="forSpace"></div> 
+
+    <span id = "headings">Volume : </span>
+        <span id = "values"><%= devices.volume %> </span><br> <div id="forSpace"></div> 
+
+    <!-- A message for user confirmation -->
+    <p> Are you sure you want to delete this device permanently?</p>
+
+    <!--Button for deleting-->
+    <button class="delDevice"> Yes </button>
+
+    <!--Link button to go back to deleteDevice page-->
+    <a href="/deleteDevice"> <div class="noButton"> No </div> </a>
+
+
+    </form>
+
+    <% }) %>
+
+    </div>
+
+    <p> *0 & -1 is for off and close . 1 is for on and open</p>
+
+
+    
+</body>
+
+</html>

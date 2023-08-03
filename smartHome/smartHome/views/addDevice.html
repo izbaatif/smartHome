@@ -1,0 +1,353 @@
+<!doctype html>
+
+<head>
+    <title>Add Device</title>
+
+    <style>
+        /*- body properties--*/
+        body {
+            background: white;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        /*--h1 properties--*/
+        h1 {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 40px;
+            color: green;
+            text-align: center;
+        }
+
+
+        /*--paragraph properties--*/
+        p {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 20px;
+            color: black;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        /*--Navigation bar propeties--*/
+        nav {
+            background: green;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            margin: none;
+        }
+
+
+        /*--Navigation list propeties--*/
+        nav ol {
+            border: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        nav li {
+            display: inline;
+            border: none;
+            padding: 3px;
+        }
+
+        nav li a {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            text-decoration: none;
+            font-variant: normal;
+            font-weight: normal;
+            font-size: 25px;
+            color: white;
+            display: inline-block;
+            padding: 10px;
+        }
+
+        nav li a:hover {
+            color: wheat;
+            text-decoration: none;
+        }
+
+        .submitButton{
+            background-color: green;
+            color:white;
+            margin-left:40%;
+            margin-top: 30px;
+            width:150px;
+            height:40px;
+            border:none;
+            font-size: 20px;
+            padding:5px;
+            
+        }
+
+        .submitButton:hover{
+            color:wheat;
+        }
+
+        #device_name{
+            margin:10px;
+            font-size: 15px;
+            width:200px;
+            height:25px;
+        }
+
+        #add_device{
+            margin:10px;
+            padding:5px;
+            font-size: 15px;
+            width:200px;
+            height:30px;
+        }
+
+        #temp{
+            margin:10px;
+            font-size: 15px;
+            width:200px;
+            height:25px;
+        }
+
+        #vol{
+            margin:10px;
+            font-size: 15px;
+            width:200px;
+            height:25px;
+        }
+
+        /* ------- On/Off button slider (code from w3schools) ----*/
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin:15px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: green;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #a6a6a6;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 16px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        form
+        {
+            color: green;
+            font-size: 25px;
+            font-family: "Raleway", sans-serif;
+            margin-left:25%;
+            padding:20px;
+            text-align: left;
+            width:700px;
+            border:5px solid green;
+        }
+
+    </style>
+
+</head>
+
+<nav>
+    <div id="menu">
+        <ol>
+            <li> <a href="/">Home </a> </li>
+            <li> <a href="/about"> About </a> </li>
+            <li> <a href=""> Add Device </a> </li>
+            <li> <a href="/showDeviceStatus"> Check Device Status </a> </li>
+            <li> <a href="/updateDeviceStatus"> Upate Device Status</a> </li>
+            <li> <a href="/deleteDevice"> Delete Device </a> </li>
+        </ol>
+    </div>
+</nav>
+
+<body>
+    <h1> My Smart Home - Add Device </h1>
+
+    <!---Form with post method to save data to database-->
+    <form method="POST" action="/addingDevice">
+
+        <!--Html select with devices types-->
+        <label for="add_device"> Select the device you want to add:</label>
+        <select name="selectDevice" id="add_device" onChange="deviceChanged()" required>
+            <option value="Cooling" selected> Cooling </option>
+            <option value="Heating"> Heating </option>
+            <option value="Door"> Door </option>
+            <option value="Curtains"> Curtains </option>
+            <option value="Blinds"> Blinds</option>
+            <option value="Lights"> Lights</option>
+            <option value="Cameras"> Cameras </option>
+            <option value="TV"> TV </option>
+            <option value="Radio"> Radio </option>
+            <option value="Speakers"> Speakers </option>
+            <option value="Fridge"> Fridge </option>
+            <option value="Hob"> Hob </option>
+            <option value="Microwave"> Microwave </option>
+            <option value="Blender"> Blender </option>
+        </select> <br>
+
+        <!--Html text input for device name-->
+        <label for="device_name"> Give your device a name:</label>
+        <input id="device_name" type="text" name="device_name" minlength="4" required/> <br>
+
+        <!--Html checkboxes for device on/off and open/close-->
+        <label for="switch"> On/Off: </label> <label class="switch"> 
+        <input type="checkbox" name="onoffCheckbox" id="onoff" value=0 onChange="checkOn()"> <span class="slider round" required></span></label> <br>
+
+        <label for="switch"> Open/Close: </label> <label class="switch"> 
+        <input type="checkbox" name="opencloseCheckbox" id="openclose" value=0 onChange="checkOn()"> <span class="slider round" required></span></label> <br>
+
+        <!--Html number input for temperature and volume with min and max range-->
+        <label for="temp"> Set Temperature (10-30 &deg;C): </label> 
+        <input id="temp" type="number" name="temp" value="20" min="10" max="30" required> <br>
+
+        <label for="vol"> Set Volume (0-100): </label> 
+        <input id="vol" type="number" name="vol" value="50" min="0" max="100" required> <br>
+        
+        <!---Button for adding-->
+        <button class="submitButton"> Add Device </button>
+
+
+    </form>
+
+    
+
+</body>
+
+<script>
+
+    //function run when on/off or open/close checkbox value is changed
+    function checkOn()
+    {
+        //Passes the appropriate value for on/off when its checked and not checked
+        if(document.getElementById('onoff').checked==true)
+        {
+            document.getElementById('onoff').value = 1;
+        }
+        
+        else
+        {
+            document.getElementById('onoff').value = 0;
+        }
+
+        //Passes the appropriate value for open/close when its checked and not checked
+        if(document.getElementById('openclose').checked==true)
+        {
+            document.getElementById('openclose').value = 1;
+        }
+        
+        else
+        {
+            document.getElementById('openclose').value = false;
+        }
+    }
+
+    //Runs when the select value is changed
+    function deviceChanged()
+    {
+        //Gets the hmtl select
+        var select = document.getElementById('add_device');
+        //Gets the value of the selected option
+        var value = select.options[select.selectedIndex].value; 
+
+        //Group together similar properties
+
+        //Disables all except on/off and temperature because they are needed
+        if(value == "Cooling"  || value == "Heating" || value == "Fridge")
+        {
+            document.getElementById('onoff').disabled = false;
+            document.getElementById('openclose').disabled = true;
+            document.getElementById('temp').disabled = false;
+            document.getElementById("vol").disabled = true;
+            
+        }
+
+        //Disables all except open/close because its needed
+        if(value == "Door" || value == "Curtains" ||  value == "Blinds")
+        {
+            document.getElementById('onoff').disabled = true;
+            document.getElementById('openclose').disabled = false;
+            document.getElementById('temp').disabled = true;
+            document.getElementById("vol").disabled = true;
+        }
+        
+        //Disables all except on/off because its needed
+        if(value == "Lights" || value == "Cameras" || value == "Hob" || value == "Microwave" || value == "Blender")
+        {
+            document.getElementById('onoff').disabled = false;
+            document.getElementById('openclose').disabled = true;
+            document.getElementById('temp').disabled = true;
+            document.getElementById("vol").disabled = true;
+        }
+
+        //Disables all except on/off and volume because they are needed
+        if(value == "TV" || value == "Radio" || value == "Speakers")
+        {
+            document.getElementById('onoff').disabled = false;
+            document.getElementById('openclose').disabled = true;
+            document.getElementById('temp').disabled = true;
+            document.getElementById("vol").disabled = false;
+        }
+
+    }
+
+</script>
+
+</html>
